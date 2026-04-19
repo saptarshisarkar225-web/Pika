@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Pika Babbe ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        text-align: center;
+        overflow: hidden;
+        color: #fff;
+    }
+
+    .container {
+        padding: 20px;
+        margin-top: 20vh;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+        margin-top: 10px;
+        animation: fadeIn 3s ease-in-out;
+    }
+
+    p {
+        font-size: 1rem;
+        margin: 20px;
+        animation: fadeIn 4s ease-in-out;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        background: #ff4081;
+        color: white;
+        cursor: pointer;
+        margin-top: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+        background: #e73370;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 600px) {
+        h1 { font-size: 1.8rem; }
+        h2 { font-size: 1.2rem; }
+        p { font-size: 0.95rem; }
+    }
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+    <h1>🎂 Happy Birthday Pika Babbe ❤️</h1>
+    <h2>Priyanka 💖 (20 April 1997)</h2>
+    
+    <p>
+        My love, my Pika Babbe 🥰<br><br>
+        On your special day, I just want to say…<br>
+        You are the most beautiful part of my life 💕<br>
+        Your smile makes my world brighter ✨<br><br>
+        I’m so lucky to have you 💖<br>
+        Happy Birthday my love 🎉
+    </p>
+
+    <button onclick="startConfetti()">Celebrate 🎊</button>
+</div>
+
+<script>
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let pieces = [];
+
+function random(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function createConfetti() {
+    for (let i = 0; i < 150; i++) {
+        pieces.push({
+            x: random(0, canvas.width),
+            y: random(0, canvas.height),
+            size: random(5, 10),
+            speed: random(1, 3),
+            color: `hsl(${random(0, 360)}, 100%, 70%)`
+        });
+    }
+}
+
+function updateConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    pieces.forEach((p) => {
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+    });
+
+    requestAnimationFrame(updateConfetti);
+}
+
+function startConfetti() {
+    pieces = [];
+    createConfetti();
+    updateConfetti();
+}
+</script>
+
+</body>
+</html>
